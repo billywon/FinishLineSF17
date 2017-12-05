@@ -5,13 +5,21 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      flights: [{
+      current: {
         number: 'BBA017',
         departure: 'SFO',
         destination: 'LAX',
         boarding: '9:00',
         arrival: '10:30',
         status: 'on time'
+      },
+      flights: [{
+        number: 'BBA019',
+        departure: 'OAK',
+        destination: 'LAX',
+        boarding: '10:00',
+        arrival: '14:30',
+        status: 'delayed'
       }, {
         number: 'BBA018',
         departure: 'SFO',
@@ -19,13 +27,6 @@ export default class App extends React.Component {
         boarding: '10:15',
         arrival: '11:45',
         status: 'on time'
-      }, {
-        number: 'BBA019',
-        departure: 'OAK',
-        destination: 'LAX',
-        boarding: '10:00',
-        arrival: '14:30',
-        status: 'delayed'
       }, {
         number: 'BBA020',
         departure: 'SJC',
@@ -46,7 +47,15 @@ export default class App extends React.Component {
           <Text> Age  : 38 </Text>
           <Text> TSA Precheck : true </Text>
         </View>
-        <View style={{width: 300, height: 300, backgroundColor: 'steelblue'}}>
+        <View style={{width: 300, height: 130, backgroundColor: 'steelblue', padding: 10}}>
+          <Text> Flight Number : {this.state.current.number} </Text>
+          <Text> Departure : {this.state.current.departure} </Text>
+          <Text> Destination : {this.state.current.destination} </Text>
+          <Text> Boarding Time : {this.state.current.boarding} </Text>
+          <Text> Arrival Time : {this.state.current.arrival} </Text>
+          <Text> Status : {this.state.current.status} </Text>
+        </View>
+        <View style={{width: 300, height: 300}}>
           <ScrollView>
             <FlightList flights={this.state.flights} />
            </ScrollView>
