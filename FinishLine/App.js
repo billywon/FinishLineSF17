@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TabBarIOS } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TabBarIOS, Image } from 'react-native';
 import FlightInfo from './FlightInfo.js';
 import CurrentFlightInfo from './CurrentFlightInfo.js';
 
@@ -41,17 +41,20 @@ export default class App extends React.Component {
         status: 'on time',
         date: 16,
       }],
-      activeState: 'flights',
+      activeState: 'flights'
     }
   }
 
   renderProfile() {
     return (
-      <View style={{backgroundColor: 'powderblue'}}>
-        <Text> User Profile </Text>
-        <Text> Name : Brianne Jane </Text>
-        <Text> Age  : 38 </Text>
-        <Text> TSA Precheck : true </Text>
+      <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center', marginTop: 100}}>
+        <Text style={{margin: 10, fontSize: 20}}> Name : Brianne Jane </Text>
+        <Image
+          style={{width: 100, height: 100}}
+          source={require('./Brianne.png')}
+        />
+        <Text style={{margin: 10, fontSize: 20}}> Age  : 38 </Text>
+        <Text style={{margin: 10, fontSize: 20}}> TSA Precheck : true </Text>
       </View>
     );
   }
@@ -76,24 +79,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    var activeState = this.state.activeState;
-    var main;
-    switch (activeState) {
-      case 'profile':
-        main = this.renderProfile();
-        break;
-      case 'flights':
-        main = (
-          <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between', padding: 10}}>
-            <View>{this.renderCurrentFlight()}</View>
-            <View>{this.renderFlights()}</View>
-          </View>
-        )
-        break;
-    }
     return (
       <View style={{flex: 1}}>
-        <View style={{flex: 0.1, backgroundColor: 'steelblue', alignItems: 'center'}}>
+        <View style={{flex: 0.2, backgroundColor: '#4A90E2', alignItems: 'center'}}>
           <View style={{
               flex: 1,
               flexDirection: 'column',
@@ -104,14 +92,32 @@ export default class App extends React.Component {
             <Text style={{fontSize: 20, color: 'white'}}>Big Blue Airline</Text>
           </View>
         </View>
-        <View style={{flex: 0.8}}>
-          {main}
-        </View>
-        {/* <View style={{flex: 0.1}}>
-          <TabBarIOS itemPositioning='center' tint='gray'>
-            <TabBarIOS.Item systemIcon='bookmarks' title='Flights' onPress={() => this.setTab('flight')}/>
-          </TabBarIOS>
-        </View> */}
+
+        <TabBarIOS>
+          <TabBarIOS.Item
+            title='Flights'
+            selected={this.state.activeState === 'flights'}
+            onPress={() => {
+              this.setState({
+                activeState: 'flights'
+              });
+          }}>
+            <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between', padding: 10}}>
+              <View style={{flex: 1}}>{this.renderCurrentFlight()}</View>
+              <View style={{flex: 1}}>{this.renderFlights()}</View>
+            </View>
+          </TabBarIOS.Item>
+          <TabBarIOS.Item
+            title="Profile"
+            selected={this.state.activeState === 'profile'}
+            onPress={() => {
+              this.setState({
+                activeState: 'profile'
+              });
+          }}>
+            <View>{this.renderProfile()}</View>
+          </TabBarIOS.Item>
+        </TabBarIOS>
       </View>
     );
   }
