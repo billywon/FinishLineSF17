@@ -1,5 +1,15 @@
 const express = require('express');
 const app = express();
+const keys = require('./../config.js');
+// Download the Node helper library from twilio.com/docs/node/install
+// These vars are your accountSid and authToken from twilio.com/user/account
+var client = require('twilio')(keys.accountSid, keys.authToken);
+
+client.messages.create({
+    body: "Your flight has been cancelled. If you like to reschedule, go to app!",
+    to: "+14154179136",
+    from: "+15407798955"
+}).then((message) => console.log(message.sid));
 
 app.use(express.static(`${__dirname}/../dist`));
 

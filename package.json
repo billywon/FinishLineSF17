@@ -5,6 +5,7 @@
     "expo": "^23.0.0",
     "express": "^4.16.2",
     "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "twilio": "^3.10.1"
   }
 }
